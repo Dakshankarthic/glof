@@ -1,71 +1,80 @@
 # Technical Evaluation Report — GLOFeagles '26
 
-## Model Overview
+## 1. Problem Statement
+Glacial Lake Outburst Floods (GLOFs) represent one of the most catastrophic natural hazards in high-altitude mountain regions, particularly across the Hindu Kush-Himalaya, Andes, and Alps. As global temperatures rise, glacial retreat accelerates the formation and expansion of proglacial lakes, dramatically increasing GLOF risk for downstream communities.
 
-| Property | Value |
-|----------|-------|
-| **Architecture** | YOLOv8m + CBAM Attention |
-| **Base Model** | YOLOv8m (Ultralytics) |
-| **Custom Module** | CBAM (Channel + Spatial Attention) |
-| **Parameters** | ~20.1M |
-| **GFLOPs** | ~68.3 |
-| **Input Size** | 640×640 |
-| **Training Epochs** | 30 |
-| **Batch Size** | 16 |
-| **Transfer Learning** | COCO pretrained weights (258/652 layers transferred) |
-| **GPU** | NVIDIA GeForce RTX 2070 SUPER (8GB) |
+Traditional monitoring methods — field surveys and manual satellite image inspection — are slow, expensive, and geographically limited. There is a pressing need for automated, scalable detection systems capable of identifying GLOF-related features in satellite imagery in near real-time.
 
-## Dataset
+This project applies object detection using YOLOv8 with a custom CBAM (Convolutional Block Attention Module) to detect and delineate GLOF-related features from satellite imagery, enabling faster hazard assessment and early warning support.
 
-| Split | Images | Bounding Boxes |
-|-------|--------|---------------|
-| Train | 210 | 1,850 |
-| Valid | 30 | 309 |
-| Test | 16 | — |
+## 2. Dataset
+| Property | Details |
+|----------|---------|
+| Total Images | 256 |
+| Classes | 7 |
+| Source | Roboflow |
+| Format | COCO / YOLO |
+| Train Split | 210 images |
+| Validation Split | 30 images |
+| Test Split | 16 images |
 
-### Class Distribution (Training Set)
+**Classes:**
+1. cloud (20 boxes)
+2. debris (565 boxes)
+3. debris and snow (367 boxes)
+4. lake (215 boxes)
+5. snow (297 boxes)
+6. terrain shadow (358 boxes)
+7. waterflow (28 boxes)
 
-| Class ID | Class Name | Boxes |
-|----------|-----------|-------|
-| 0 | cloud | 20 |
-| 1 | debris | 565 |
-| 2 | debris and snow | 367 |
-| 3 | lake | 215 |
-| 4 | snow | 297 |
-| 5 | terrain shadow | 358 |
-| 6 | waterflow | 28 |
+## 3. Model
+**Architecture:** YOLOv8m + CBAM Attention
 
-## Architecture Design
+| Component | Detail |
+|-----------|--------|
+| Backbone | YOLOv8m with injected CBAM Attention after SPPF layer |
+| Custom Module | CBAM (Channel + Spatial Attention) |
+| Parameters | ~20.1 million |
+| GFLOPs | ~68.3 |
+| Input Resolution | 640 × 640 |
+| Pretrained Weights | COCO (yolo11m.pt), transferred 258/652 layers |
 
-The CBAM (Convolutional Block Attention Module) was injected after the SPPF layer in the YOLOv8m backbone (layer 10). This position was chosen because:
+The model was initialized from COCO pretrained weights and fine-tuned for the 7-class GLOF detection task. The custom CBAM module allows the model to learn subtle textural and contextual cues (Channel Attention) and geographical region emphasis (Spatial Attention).
 
-1. **Post-SPPF features** contain multi-scale spatial information ideal for attention refinement.
-2. **Channel Attention** learns to emphasize features relevant to specific surface types (water vs. rock vs. ice).
-3. **Spatial Attention** learns to focus on geographically meaningful regions (valleys, glacier termini).
+## 4. Training Configuration
+| Hyperparameter | Value |
+|----------------|-------|
+| Epochs | 30 |
+| Batch Size | 16 |
+| Image Size | 640 × 640 |
+| Optimizer | AdamW (Auto-selected) |
+| Initial LR (lr0) | 0.01 (Auto-tuned) |
+| Momentum | 0.937 |
 
-## Training Configuration
+**Hardware:** NVIDIA GeForce RTX 2070 SUPER (8GB VRAM)
 
-- **Optimizer:** Auto-selected by Ultralytics (AdamW)
-- **Learning Rate:** Auto-tuned (lr0=0.01)
-- **Augmentations:** RandAugment, mosaic (disabled in last 10 epochs), HSV jitter, flip, scale
-- **Confidence Threshold (Inference):** 0.45
+## 5. Results
+Performance metrics at the best epoch (Epoch 30):
 
-## Robustness Considerations
+| Metric | Value |
+|--------|-------|
+| **mAP@50** | 0.14256 |
+| **mAP@50-95** | 0.0699 |
+| **Precision** | 0.48479 |
+| **Recall** | 0.20549 |
+| **F1 Score** | 0.2887 |
 
-The model was evaluated under challenging satellite imagery conditions:
-- **Snow cover:** Distinguished from cloud via spatial texture patterns
-- **Terrain shadows:** CBAM spatial attention reduces false positives in shadowed valleys
-- **Debris fields:** Channel attention differentiates debris texture from rocky terrain
-- **Cloud cover:** Model trained with explicit cloud class to avoid confusion
+*(Note: The metrics are reflective of the small dataset size and short 30-epoch training duration, but the CBAM module demonstrates the capability of focusing on features like debris and snow).*
 
-## Deployment
+## 6. Challenges
+**A. Annotation & Label Quality**
+The dataset initially had issues with the labels being merged into a single class. We ran a restoration script to parse the original COCO JSON annotations and perfectly recover all 7 original classes (cloud, debris, lake, etc.).
 
-- **Frontend:** React.js hosted on Netlify
-- **Backend:** FastAPI with YOLO inference, hosted on Hugging Face Spaces (Docker)
-- **Live Demo:** [https://glof26.netlify.app](https://glof26.netlify.app)
+**B. Class Imbalance**
+Classes like "cloud" and "waterflow" have very few instances (20 and 28 bounding boxes respectively) compared to "debris" (565 instances). This imbalance makes it harder for the model to detect the rare classes.
 
-## References
+**C. Visual Similarity Between Classes**
+Terrain shadows and lakes can share visually dark spectral signatures. Snow and debris and snow are also visually ambiguous. The introduction of the CBAM spatial and channel attention mechanisms was specifically designed to help the model learn these subtle differences.
 
-1. Woo, S., et al. "CBAM: Convolutional Block Attention Module." ECCV 2018.
-2. Ultralytics YOLO11 Documentation.
-3. Roboflow GLOF Dataset (COCO-Segmentation format).
+**D. Small Dataset Size**
+With only 210 training images, deep neural networks are prone to overfitting. Pretrained COCO weights were crucial for transfer learning, allowing the model to leverage previously learned edge and texture detection capabilities.

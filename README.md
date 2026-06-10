@@ -1,5 +1,16 @@
 # GLOF Detection — GLOFeagles '26 Challenge
 
+> **Live Demo:** [https://glof26.netlify.app](https://glof26.netlify.app)  
+> **YouTube Link:** [https://youtu.be/jKZPJ0i8uwg?feature=shared](https://youtu.be/jKZPJ0i8uwg?feature=shared)
+
+━━━━━━━━━━━━━━━━━━━━━━
+TEAM INNOVATORS 
+━━━━━━━━━━━━━━━━━━━━━━
+Medwin Manuel  S 
+Dakshan Karthic S
+Vishagan E
+Mentor : Uma Maheswari Pandyan
+
 ## Glacial Lake Outburst Flood Detection using YOLOv8 + CBAM Attention
 
 This repository contains our solution for the **GLOFeagles '26 Challenge** — a satellite imagery-based detection system for identifying Glacial Lake Outburst Flood (GLOF) hazards using deep learning.
@@ -72,10 +83,6 @@ python train.py --data dataset/glof.yaml --epochs 30 --batch 16 --device 0
 | Precision | See evaluation_report.md |
 | Recall | See evaluation_report.md |
 | F1 Score | See evaluation_report.md |
-
-## 📹 Explanation Video
-
-> **YouTube Link:** [https://youtu.be/jKZPJ0i8uwg?feature=shared](https://youtu.be/jKZPJ0i8uwg?feature=shared)
 
 
 
