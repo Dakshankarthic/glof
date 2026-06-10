@@ -1,0 +1,7 @@
+path: D:\glof\training\dataset
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 7
+names: ['cloud', 'debris', 'debris and snow', 'lake', 'snow', 'terrain shadow', 'waterflow']

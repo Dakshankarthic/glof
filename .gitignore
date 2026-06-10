@@ -1,0 +1,47 @@
+# Byte-compiled
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+training/venv/
+
+# Model weights (too large for git, use Git LFS or download separately)
+*.pt
+!best.pt
+
+# Dataset images (too large)
+training/dataset/train/images/
+training/dataset/valid/images/
+training/dataset/test/images/
+training/dataset/train/labels.cache
+training/dataset/valid/labels.cache
+
+# COCO annotation files
+training/dataset/*/_annotations.coco.json
+
+# Training runs
+training/runs/
+runs/
+
+# Node modules
+frontend/node_modules/
+frontend/dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+submission/
