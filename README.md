@@ -77,10 +77,7 @@ python train.py --data dataset/glof.yaml --epochs 30 --batch 16 --device 0
 
 > **YouTube Link:** [https://youtu.be/jKZPJ0i8uwg?feature=shared](https://youtu.be/jKZPJ0i8uwg?feature=shared)
 
-## 👥 Team
 
-- **Team Name:** *(Your team name)*
-- **Members:** Dakshan Karthic
 
 ## 📜 License
 
