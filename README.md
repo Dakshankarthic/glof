@@ -1,7 +1,7 @@
 # GLOF Detection — GLOFeagles '26 Challenge
 
 > **Live Demo:** [https://glof26.netlify.app](https://glof26.netlify.app)  
-> **YouTube Link:** [https://youtu.be/jKZPJ0i8uwg?feature=shared](https://youtu.be/jKZPJ0i8uwg?feature=shared)
+> **YouTube Link:** [https://youtu.be/jKZPJ0i8uwg?feature=shared](https://youtu.be/jKZPJ0i8uwg?si=TVT5uyrEgCJcZGNa)
 
 ## Glacial Lake Outburst Flood Detection using YOLOv8 + CBAM Attention
 
