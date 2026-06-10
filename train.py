@@ -1,7 +1,7 @@
 """
 train.py
 ========
-Training script for GLOF Detection using YOLO11m + CBAM Attention.
+Training script for GLOF Detection using YOLOv8m + CBAM Attention.
 
 Usage:
     python train.py --data dataset/glof.yaml --epochs 30 --batch 16 --device 0

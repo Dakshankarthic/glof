@@ -1,10 +1,10 @@
 """
 model_architecture.py
 =====================
-Custom YOLO11m + CBAM (Convolutional Block Attention Module) Architecture
+Custom YOLOv8m + CBAM (Convolutional Block Attention Module) Architecture
 for Glacial Lake Outburst Flood (GLOF) Detection.
 
-Architecture: YOLO11m backbone with injected CBAM Attention after SPPF layer.
+Architecture: YOLOv8m backbone with injected CBAM Attention after SPPF layer.
 Classes: 7 (cloud, debris, debris and snow, lake, snow, terrain shadow, waterflow)
 """
 
@@ -77,7 +77,7 @@ class CBAM(nn.Module):
     Convolutional Block Attention Module (CBAM).
     
     Sequentially applies Channel Attention followed by Spatial Attention
-    to refine feature maps. Injected after the SPPF layer in the YOLO11m
+    to refine feature maps. Injected after the SPPF layer in the YOLOv8m
     backbone to enhance the model's ability to focus on discriminative 
     regions in satellite imagery (e.g., glacial lakes vs. terrain shadows).
     

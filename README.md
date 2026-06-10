@@ -26,7 +26,7 @@ glof/
 ├── requirements.txt          # Python dependencies
 ├── best.pt                   # Trained model weights
 ├── glof_notebook.ipynb       # Full pipeline notebook
-├── yolo11-cbam.yaml          # Model architecture YAML config
+├── yolov8-cbam.yaml          # Model architecture YAML config
 ├── evaluation_report.md      # Technical evaluation report
 ├── backend/                  # FastAPI backend (Hugging Face Spaces)
 │   ├── main.py

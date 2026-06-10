@@ -1,7 +1,7 @@
 """
 inference.py
 ============
-Run GLOF detection inference on satellite images using YOLO11m + CBAM Attention.
+Run GLOF detection inference on satellite images using YOLOv8m + CBAM Attention.
 
 Usage:
     python inference.py --source path/to/image.jpg --weights best.pt

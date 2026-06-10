@@ -4,7 +4,7 @@
 
 | Property | Value |
 |----------|-------|
-| **Architecture** | YOLO11m + CBAM Attention |
+| **Architecture** | YOLOv8m + CBAM Attention |
 | **Base Model** | YOLOv8m (Ultralytics) |
 | **Custom Module** | CBAM (Channel + Spatial Attention) |
 | **Parameters** | ~20.1M |
@@ -37,7 +37,7 @@
 
 ## Architecture Design
 
-The CBAM (Convolutional Block Attention Module) was injected after the SPPF layer in the YOLO11m backbone (layer 10). This position was chosen because:
+The CBAM (Convolutional Block Attention Module) was injected after the SPPF layer in the YOLOv8m backbone (layer 10). This position was chosen because:
 
 1. **Post-SPPF features** contain multi-scale spatial information ideal for attention refinement.
 2. **Channel Attention** learns to emphasize features relevant to specific surface types (water vs. rock vs. ice).
