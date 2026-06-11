@@ -9,7 +9,7 @@ This repository contains our solution for the **GLOFeagles '26 Challenge** — a
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 - **Base Model:** YOLOv8m (Ultralytics)
 - **Custom Enhancement:** CBAM (Convolutional Block Attention Module) injected after the SPPF layer
@@ -18,7 +18,7 @@ This repository contains our solution for the **GLOFeagles '26 Challenge** — a
 - **Parameters:** ~20.1M
 - **Transfer Learning:** COCO pretrained weights with fine-tuning
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 glof/
@@ -45,7 +45,7 @@ glof/
 └── segmentation_masks/       # Generated segmentation masks
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 ```bash
@@ -62,12 +62,12 @@ python inference.py --source path/to/satellite/image.jpg --weights best.pt
 python train.py --data dataset/glof.yaml --epochs 100 --batch 16 --device 0
 ```
 
-## 🌐 Live Demo
+## Live Demo
 
 - **Frontend:** [https://glof26.netlify.app](https://glof26.netlify.app)
 - **Backend API:** [https://dk1112-glof-detection-api.hf.space](https://dk1112-glof-detection-api.hf.space)
 
-## 📊 Evaluation Metrics
+## Evaluation Metrics
 
 | Metric | Value |
 |--------|-------|
@@ -77,16 +77,13 @@ python train.py --data dataset/glof.yaml --epochs 100 --batch 16 --device 0
 | F1 Score | See evaluation_report.md |
 
 
-━━━━━━━━━━━━━━━━━━━━━━
-TEAM INNOVATORS 
-━━━━━━━━━━━━━━━━━━━━━━
+## TEAM INNOVATORS 
 
 Medwin Manuel  S
 Dakshan Karthic S
 Vishagan E
-Mentor : Dr.Uma Maheswari Pandyan 
-______________________
+Mentor : Dr.Uma Maheswari Pandyan
 
-## 📜 License
+## License
 
 This project is developed for the GLOFeagles '26 Challenge.
