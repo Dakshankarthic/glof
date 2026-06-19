@@ -1,0 +1,67 @@
+# Byte-compiled
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+
+venv/
+.venv/
+training/venv/
+
+# Model weights
+
+*.pt
+!best.pt
+
+# ONNX exports
+
+*.onnx
+!best.onnx
+
+# Dataset images
+
+training/dataset/train/images/
+training/dataset/valid/images/
+training/dataset/test/images/
+
+# Cache files
+
+*.cache
+
+# Annotation files (optional)
+
+training/dataset/*/_annotations.coco.json
+
+# Training outputs
+
+runs/
+training/runs/
+
+# Segmentation masks generated during inference
+
+segmentation_masks/
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# IDE files
+
+.idea/
+.vscode/
+*.swp
+
+# Logs
+
+*.log
+
+# Temporary files
+
+*.tmp
+
+# Submission folder
+
+submission/

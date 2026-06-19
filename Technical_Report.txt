@@ -1,0 +1,23 @@
+
+AUTOMATED DETECTION OF GLACIAL LAKES
+
+Objective:
+Detect glacial lakes from satellite imagery.
+
+Model:
+YOLO11l-Seg
+
+Dataset:
+Moraine Dammed
+Snow Cover
+Terrain Shadow
+Debris Cover
+Varying Turbidity
+
+Training:
+Epochs: 50
+Image Size: 640
+Optimizer: AdamW
+
+Conclusion:
+The model successfully segments glacial lakes from satellite imagery.
